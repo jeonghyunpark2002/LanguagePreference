@@ -1,0 +1,10 @@
+init_args:
+  _target_: models.retrievers.dense.Dense
+  model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  max_len: 128
+  pooler:
+    _target_: models.retrievers.dense.ClsPooler
+  similarity:
+    _target_: models.retrievers.dense.DotProduct
+batch_size: 512
+batch_size_sim: 2048
