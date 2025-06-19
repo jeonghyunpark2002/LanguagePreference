@@ -305,10 +305,8 @@ print(f"Translated passages saved to {translated_passages_file}")
 
 mkqa_path = os.path.join(base_path, "mkqa_en_train")
 mkqa_ds = load_from_disk(mkqa_path)
-mkqa_id2query = {}
-for i in range(len(mkqa_ds)):
-    qid = str(mkqa_ds[i]["id"])
-    mkqa_id2query[qid] = qid  
+mkqa_id2query = {str(r["id"]): str(r.get("content", r["id"])) for r in mkqa_ds}
+
 
 final_results = {}
 for query_id, passages in tqdm(all_passages.items(), desc="Re-ranking"):
